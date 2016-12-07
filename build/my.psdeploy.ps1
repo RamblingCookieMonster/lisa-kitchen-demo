@@ -1,6 +1,6 @@
 Deploy ExampleDeployment {
     By FileSystem prod {
-        FromSource "$ENV:BHProjectPath"
+        FromSource "C:\projects\lisa-kitchen-demo"
         To 'C:\Project'
         Tagged Prod
     }
