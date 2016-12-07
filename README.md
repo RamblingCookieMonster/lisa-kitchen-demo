@@ -37,3 +37,24 @@ Stay tuned.  Will update this.  Basically:
   * `build.ps1` Defines variables, invokes Pester, deploys things in `build\my.deploy.ps1` with PSDeploy
 
 Right.  Duct tape and bubble gum.  Maybe s/duct/masking.
+
+## So... How do I use this?
+
+This is more of a demo, but if it meets your needs, you can certainly use it.
+
+* Toss a module, configuration, whatever you need in the repo
+* Adjust `build\requirements.psd1` as needed
+* Configure / bootstrap / provision as needed in the `Start-Build` provision section.  Ctrl+f `# Do some things!`
+* Adjust `build\build.ps1` to run tests, deployments, and other tasks as needed
+* Refer to files from the repo via `$ENV\Kitchen\Data`.  Note that hidden files (e.g. `.something`) won't be copied over.
+* Play
+
+You may find that typical tasks are better fit within the DSC or other configuration management provisioners, and Pester verifier.
+
+## Further Reading
+
+More to come, but the followin were quite handy:
+
+* [Testing Ansible Roles Against Windows with Test-Kitchen](https://hodgkins.io/testing-ansible-roles-windows-test-kitchen)
+* [Introduction to Kitchen-DSC](https://gaelcolas.com/2016/07/11/introduction-to-kitchen-dsc/)
+* Various GitHub repos.  e.g. [1](https://github.com/smurawski/dsc-kitchen-project), [2](https://github.com/powershellorg/cwebadministration/tree/smurawski/adding_tests)
