@@ -98,6 +98,7 @@ Task Deployment {
     $Params = @{
         Path = $ProjectRoot
         Force = $true
+        ErrorAction = 'SilentlyContinue' #Don't do this.  Temp fix for bad design...
     }
     # Consider gating deployment
     if (
