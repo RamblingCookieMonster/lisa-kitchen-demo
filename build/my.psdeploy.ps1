@@ -1,6 +1,6 @@
 Deploy ExampleDeployment {
     By FileSystem {
-        FromSource "$ENV\Kitchen\data"
+        FromSource "$ENV:Temp\Kitchen\data"
         To 'C:\Project'
     }
 }

@@ -91,30 +91,25 @@ Task Test {
 Task Deployment {
     $lines
 
-    # Gate deployment
-    if(
-        # $ENV:BHBuildSystem -ne 'Unknown' -and  # Typically you might gate deployments to your build system
-        $ENV:BHBranchName -eq "master" -and
-        $ENV:BHCommitMessage -match '!deploy'
-    )
-    {
+    # Consider gating deployment
+        # $ENV:BHBuildSystem -ne 'Unknown' -and  # you might gate deployments to your build system
+        # $ENV:BHBranchName -eq "master" -and    # you might have another deployment for dev, or use tagged deployments based on branch
+        # $ENV:BHCommitMessage -match '!deploy'  # you might add a trigger via commit message
         $Params = @{
             Path = $ProjectRoot
             Force = $true
         }
 
-        Invoke-PSDeploy @Verbose @Params
-    }
-    else
-    {
-        "Skipping deployment: To deploy, ensure that...`n" +
-        "`t* You are in a known build system (Current: $ENV:BHBuildSystem)`n" +
-        "`t* You are committing to the master branch (Current: $ENV:BHBranchName) `n" +
-        "`t* Your commit message includes !deploy (Current: $ENV:BHCommitMessage)"
-    }
+        $DeployOutput = Invoke-PSDeploy @Verbose @Params
+        if($Verbose.Verbose)
+        {
+            $DeployOutput
+        }
+        "`n"
 }
 
 Task TestDeploy { # Did it actuall deploy?
-    dir C:\
+    $lines
     Invoke-Tests $ProjectRoot\Test\Operational\
+    "`n"
 }
