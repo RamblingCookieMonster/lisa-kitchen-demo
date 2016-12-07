@@ -7,13 +7,15 @@
 #>
 
 # Set up some variables
-$ProjectRoot = ( Resolve-Path "$PSScriptRoot/.." ).Path
-Set-BuildEnvironment -Path $ProjectRoot
 if($ENV:BHProjectPath)
 {
     $ProjectRoot = $ENV:BHProjectPath
     "Build variables:"
     Get-Item ENV:BH* | Format-Table -AutoSize
+}
+else
+{
+    $ProjectRoot = ( Resolve-Path "$PSScriptRoot/.." ).Path
 }
 
 $lines = '----------------'
@@ -97,8 +99,6 @@ Task Deployment {
         Path = $ProjectRoot
         Force = $true
     }
-    "Debug..."
-    dir ENV:BH*
     # Consider gating deployment
     if (
         $ENV:BHBuildSystem -eq 'AppVeyor' -and  # you might gate deployments to your build system

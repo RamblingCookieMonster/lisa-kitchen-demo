@@ -50,20 +50,21 @@ if($Kitchen)
     return
 }
 
+# Kind of a pain.  Pick our project path based on environment.
+if(Test-Path "$PSScriptRoot\data\build")
+{
+    # In Kitchen
+    $ProjectPath = "$PSScriptRoot\data"
+}
+else
+{
+    # Not in Kitchen, this script should be in root of repo dir
+    $ProjectPath = $PSScriptRoot
+}
+
 # Verify is only called from verify stage...  So provision here.
 if($Action -contains 'Provision')
 {
-    # Kind of a pain.  Pick our project path based on environment.
-    if(Test-Path "$PSScriptRoot\data\build")
-    {
-        # In Kitchen
-        $ProjectPath = "$PSScriptRoot\data"
-    }
-    else
-    {   # Not in Kitchen, this script should be in root of repo dir
-        $ProjectPath = $PSScriptRoot
-    }
-
     # dependencies
     if(-not (Get-Module -ListAvailable PSDepend))
     {
@@ -84,6 +85,7 @@ if($Action -contains 'Provision')
 if($Action -contains 'Verify')
 {
     # kick off the actual build
+    Set-BuildEnvironment -Path $ProjectPath
     Import-Module InvokeBuild
     Invoke-Build -File "$PSScriptRoot\build\build.ps1" -Task Deploy
 }
