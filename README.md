@@ -7,6 +7,8 @@ This is meant to demo test-kitchen, but could potentially solve two minor proble
 * Running tests on a system with artifacts and configurations in place can result in misleading local test results
 * Authoring code on a platform or version of PowerShell that isn't compatible with the tools in your build pipeline (hopefully this changes quickly)
 
+Note: This was a quick hit to illustrate using Test-Kitchen, it's not intended to be seen as a model, and there may be bumps that I didn't account for.
+
 So!  If you're not familiar with Ruby, how do you get started?
 
 ## Prerequisites
