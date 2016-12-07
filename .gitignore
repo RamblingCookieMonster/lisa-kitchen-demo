@@ -1,0 +1,6 @@
+.kitchen/
+.vendor/
+.bundle/
+Gemfile*.lock
+.ruby-version
+.azure-things

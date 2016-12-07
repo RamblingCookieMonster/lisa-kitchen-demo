@@ -1,0 +1,45 @@
+---
+
+# What am I controlling? Vagrant, Azure, Hyper-V, OpenStack, Docker  etc.
+# https://github.com/test-kitchen/kitchen-vagrant
+driver:
+  name: vagrant
+  linked_clones: true
+  gui: false
+  communicator: winrm
+  customize:
+    cpus: 2
+    memory: 4096
+
+# Do things!  Load prerequisites.  Configure a thing.  etc.
+# https://github.com/test-kitchen/kitchen-dsc
+provisioner:
+  name: shell             # or Puppet, Chef, Ansible, SaltStack, shell, etc.
+  data_path: .            # Folder, copied to $ENV:Temp\Kitchen\Data
+  script: start-build.ps1 # Script to bootstrap things
+
+# So... how do I talk to the configured thing?
+transport:
+  name: winrm
+
+# Do more things!  Ideally, tests!  Validate what we did at provisioner stage.
+# https://github.com/test-kitchen/kitchen-pester
+verifier:
+  name: shell # or shell +serverspec, shell +inspec, etc.
+  command: . $ENV:TEMP\Kitchen\Data\Start-Build.ps1 -Action Verify
+  remote_exec: true
+
+# What individual instance(s) will I spin up?
+# https://www.packer.io/
+platforms:
+  - name: windows-2012r2-wmf4 # Test against a few different platforms
+    driver:
+      box: mwrock/Windows2012R2
+#  - name: windows-nano-wmf5.1
+#    driver:
+#      box: mwrock/WindowsNano
+
+# Do I have more than one thing to run?
+    # Different test cases - provisioner + verifier
+suites:
+  - name: default # Could test multiple suites, vary other components within each suite

@@ -1,0 +1,11 @@
+source 'http://rubygems.org'
+ruby '2.3.0'
+
+gem 'test-kitchen'
+gem 'kitchen-vagrant', '0.20.0'
+gem 'kitchen-hyperv'
+gem 'kitchen-azurerm'
+gem 'kitchen-dsc'
+gem 'kitchen-pester'
+gem 'winrm'
+gem 'winrm-fs'
