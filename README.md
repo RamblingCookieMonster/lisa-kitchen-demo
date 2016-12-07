@@ -53,7 +53,7 @@ This is more of a demo, but if it meets your needs, you can certainly use it.
 
 You may find that typical tasks are better fit within the DSC or other configuration management provisioners, and Pester verifier.
 
-As for why you would use Test-Kitchen in the first place, Matt Hodgkins has [a nice write-up](https://hodgkins.io/testing-ansible-roles-windows-test-kitchen) that walks through some of the benefits.
+As for why you would use Test-Kitchen in the first place, [Matt Hodgkins](https://hodgkins.io/testing-ansible-roles-windows-test-kitchen) and [Gael Colas](https://gaelcolas.com/2016/07/11/introduction-to-kitchen-dsc/) have nice write-ups on how to and why you might use Test-Kitchen.
 
 Could you roll your own code that does all this?  Sure.  But, if it fits your needs, you might consider using a tool with a decent community behind it, and a variety of existing plugins.
 

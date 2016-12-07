@@ -60,10 +60,9 @@ if($Action -contains 'Provision')
     }
     $Requirements = "$PSScriptRoot\data\build\requirements.psd1"
 
-    "Installing requirements:"
-    Get-Content $Requirements
+    "Installing requirements from $Requirements"
     Import-Module PSDepend
-    Invoke-PSDepend -Path $Requirements -Force
+    $null = Invoke-PSDepend -Path $Requirements -Force
 
     # Do some things!
     #  * Compile and apply MOFs that you'll test in the verify stage
