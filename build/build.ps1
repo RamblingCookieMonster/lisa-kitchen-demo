@@ -11,7 +11,7 @@ if($ENV:BHProjectPath)
 {
     $ProjectRoot = $ENV:BHProjectPath
     "Build variables:"
-    Get-Item ENV:BH* | Format-Table -AutoSize
+    Get-Item ENV:BH*
 }
 else
 {
@@ -122,7 +122,6 @@ Task Deployment {
         $DeployOutput
     }
 
-    dir C:\Project -Recurse | Select -expandproperty fullname
     "`n"
 }
 
