@@ -1,5 +1,5 @@
 Describe 'Build Prerequisites' {
-    It 'Deployed successfully' {
+    It 'bootstrapped successfully' {
         Get-Module PoshSpec -ListAvailable | Should Not BeNullOrEmpty
     }
 }
