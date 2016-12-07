@@ -120,6 +120,8 @@ Task Deployment {
     {
         $DeployOutput
     }
+
+    dir C:\Project -Recurse | Select -expandproperty fullname
     "`n"
 }
 
