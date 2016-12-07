@@ -85,7 +85,7 @@ if($Action -contains 'Provision')
 if($Action -contains 'Verify')
 {
     # kick off the actual build
-    Set-BuildEnvironment -Path $ProjectPath
+    Set-BuildEnvironment -Path $ProjectPath -WarningAction SilentlyContinue
     Import-Module InvokeBuild
     Invoke-Build -File "$PSScriptRoot\build\build.ps1" -Task Deploy
 }

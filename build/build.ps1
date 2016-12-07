@@ -100,6 +100,7 @@ Task Deployment {
         Force = $true
     }
     # Consider gating deployment
+    Set-BuildEnvironment -Path $ProjectRoot -WarningAction SilentlyContinue
     if (
         $ENV:BHBuildSystem -eq 'AppVeyor' -and  # you might gate deployments to your build system
         $ENV:BHBranchName -eq "master" -and    # you might have another deployment for dev, or use tagged deployments based on branch
