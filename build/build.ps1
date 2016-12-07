@@ -97,7 +97,8 @@ Task Deployment {
         Path = $ProjectRoot
         Force = $true
     }
-
+    "Debug..."
+    dir ENV:BH*
     # Consider gating deployment
     if (
         $ENV:BHBuildSystem -eq 'AppVeyor' -and  # you might gate deployments to your build system
