@@ -53,16 +53,26 @@ if($Kitchen)
 # Verify is only called from verify stage...  So provision here.
 if($Action -contains 'Provision')
 {
+    # Kind of a pain.  Pick our project path based on environment.
+    if(Test-Path "$PSScriptRoot\data\build")
+    {
+        # In Kitchen
+        $ProjectPath = "$PSScriptRoot\data"
+    }
+    else
+    {   # Not in Kitchen, this script should be in root of repo dir
+        $ProjectPath = $PSScriptRoot
+    }
+
     # dependencies
     if(-not (Get-Module -ListAvailable PSDepend))
     {
-        & (Resolve-Path "$PSScriptRoot\data\build\helpers\Install-PSDepend.ps1")
+        & (Resolve-Path "$ProjectPath\build\helpers\Install-PSDepend.ps1")
     }
-    $Requirements = "$PSScriptRoot\data\build\requirements.psd1"
 
-    "Installing requirements from $Requirements"
+    "Installing requirements"
     Import-Module PSDepend
-    $null = Invoke-PSDepend -Path $Requirements -Force
+    $null = Invoke-PSDepend -Path "$ProjectPath\build\requirements.psd1" -Force
 
     # Do some things!
     #  * Compile and apply MOFs that you'll test in the verify stage
