@@ -102,9 +102,10 @@ Task Deployment {
     }
     # Consider gating deployment
     if (
-        $ENV:BHBuildSystem -eq 'AppVeyor' -and  # you might gate deployments to your build system
-        $ENV:BHBranchName -eq "master" -and    # you might have another deployment for dev, or use tagged deployments based on branch
-        $ENV:BHCommitMessage -match '!deploy'  # you might add a trigger via commit message
+        $ENV:APPVEYOR_PROJECT_NAME
+        # $ENV:BHBuildSystem -eq 'AppVeyor' -and  # you might gate deployments to your build system
+        # $ENV:BHBranchName -eq "master" -and    # you might have another deployment for dev, or use tagged deployments based on branch
+        # $ENV:BHCommitMessage -match '!deploy'  # you might add a trigger via commit message
     )
     {
         $Tag = 'Prod'
