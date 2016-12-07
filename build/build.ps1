@@ -65,7 +65,7 @@ Task Init {
     Set-Location $ProjectRoot
     "Build System Details $(Get-Date):"
     Get-Item ENV:BH* | Format-Table -Autosize
-    if($Verbose.Verbose)
+    if ($Verbose.Verbose)
     {
         "`nPSVersionTable:"
         $PSVersionTable
@@ -91,21 +91,32 @@ Task Test {
 Task Deployment {
     $lines
 
-    # Consider gating deployment
-        # $ENV:BHBuildSystem -ne 'Unknown' -and  # you might gate deployments to your build system
-        # $ENV:BHBranchName -eq "master" -and    # you might have another deployment for dev, or use tagged deployments based on branch
-        # $ENV:BHCommitMessage -match '!deploy'  # you might add a trigger via commit message
-        $Params = @{
-            Path = $ProjectRoot
-            Force = $true
-        }
+    $Params = @{
+        Path = $ProjectRoot
+        Force = $true
+    }
 
-        $DeployOutput = Invoke-PSDeploy @Verbose @Params
-        if($Verbose.Verbose)
-        {
-            $DeployOutput
-        }
-        "`n"
+    # Consider gating deployment
+    if (
+        $ENV:BHBuildSystem -eq 'AppVeyor' -and  # you might gate deployments to your build system
+        $ENV:BHBranchName -eq "master" -and    # you might have another deployment for dev, or use tagged deployments based on branch
+        $ENV:BHCommitMessage -match '!deploy'  # you might add a trigger via commit message
+    )
+    {
+        $Tag = 'Prod'
+    }
+    else
+    {
+        $Tag = 'Local'
+    }
+
+    "Deploying with tag [$Tag]"
+    $DeployOutput = Invoke-PSDeploy @Verbose @Params -Tags $Tag
+    if ($Verbose.Verbose)
+    {
+        $DeployOutput
+    }
+    "`n"
 }
 
 Task TestDeploy { # Did it actuall deploy?
