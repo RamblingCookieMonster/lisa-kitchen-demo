@@ -7,11 +7,13 @@
 #>
 
 # Set up some variables
-$ParentPath = ( Resolve-Path "$PSScriptRoot/.." ).Path
-Set-BuildEnvironment -Path $ParentPath
+$ProjectRoot = ( Resolve-Path "$PSScriptRoot/.." ).Path
+Set-BuildEnvironment -Path $ProjectRoot
 if($ENV:BHProjectPath)
 {
     $ProjectRoot = $ENV:BHProjectPath
+    "Build variables:"
+    Get-Item ENV:BH* | Format-Table -AutoSize
 }
 
 $lines = '----------------'
