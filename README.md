@@ -4,8 +4,8 @@ Demo pipeline for LISA16.  This evolved over time, so some ugliness and scraps o
 
 This is meant to demo test-kitchen, but could potentially solve two minor problems:
 
-* You might be running tests on a system with artifacts and configurations in place that result in misleading test results
-* You might be authoring code on a platform or version of PowerShell that isn't compatible with the tools in your build pipeline (hopefully this changes quickly)
+* Running tests on a system with artifacts and configurations in place can result in misleading local test results
+* Authoring code on a platform or version of PowerShell that isn't compatible with the tools in your build pipeline (hopefully this changes quickly)
 
 So!  If you're not familiar with Ruby, how do you get started?
 
@@ -13,7 +13,7 @@ So!  If you're not familiar with Ruby, how do you get started?
 
 * Make sure you have Ruby, VirtualBox*, and Vagrant
 * Make sure you have Bundler (`gem install bundler`)
-* Browse to this repo, and `bundle install`.  This pulls down the dependencies listed in the Gemfile
+* Browse to this repo, and `bundle install`.  This pulls down the dependencies listed in the Gemfile.  You might consider specifyig a path, e.g. `bundle install --path .vendor`
 * You're ready to go!
 
 `*`: But I use Hyper-V!  No problem:
